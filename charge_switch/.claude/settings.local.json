@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cmake --build build/Debug 2>&1)"
+    ]
+  }
+}
