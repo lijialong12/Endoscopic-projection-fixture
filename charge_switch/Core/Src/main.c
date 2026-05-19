@@ -377,9 +377,11 @@ int main(void)
         // 静态变量放在函数开头，确保在 if/else 外部可访问
         static uint32_t last_time = 0;
         static uint8_t  led_count = 0;    // 0:全灭, 1~3:已亮个数, 4:全亮待熄灭
+        static uint8_t  reveflag = 0;     // 充电状态切换标志，0:未切换, 1:已切换
 
         if (!CHRG)  //低电平充电中状态：每500ms点亮一个LED，直到全亮保持
         {
+            reveflag = 0;     // 充电状态切换后，重置标志以允许下次切换时重新计数
             if (HAL_GetTick() - last_time >= 500)
             {
                 last_time = HAL_GetTick();
@@ -410,6 +412,7 @@ int main(void)
         }
         else if(!STDBY) //低电平充满电状态
         {
+            reveflag = 0;     // 充电状态切换后，重置标志以允许下次切换时重新计数
             // 充电完成状态：点亮所有LED
             LED_0_ON;
             LED_1_ON;
@@ -417,6 +420,49 @@ int main(void)
             LED_3_ON;
             led_count = 0;
             last_time = HAL_GetTick();
+        }
+        else {
+                if(reveflag == 0) {
+                    HAL_ADC_Start(&hadc);
+                    if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK) {
+                        adc_val = HAL_ADC_GetValue(&hadc);
+                        //printf("adc_val = %lu\r\n", adc_val);       // 注意：%ld → %lu，因 adc_val 是 uint32_t
+                        vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
+                        //printf("vol_v = %.2f V\r\n", vol_v);
+
+                        if(chargeflag == DISCHARGE) 
+                        {
+                            if(vol_v > 4.0f) {
+                                LED_0_ON;
+                                LED_1_ON;
+                                LED_2_ON;
+                                LED_3_ON;
+                            } 
+                            else if(vol_v > 3.0f && vol_v <= 4.0f) {
+                                LED_0_OFF;
+                                LED_1_ON;
+                                LED_2_ON;
+                                LED_3_ON;
+                            }
+                            else if(vol_v > 2.0f && vol_v <= 3.0f) {
+                                LED_0_OFF;
+                                LED_1_OFF;
+                                LED_2_ON;
+                                LED_3_ON;
+                            }
+                            else {
+                                LED_0_OFF;
+                                LED_1_OFF;
+                                LED_2_OFF;
+                                LED_3_ON;
+                            }
+                        }
+                        
+                    }
+                    HAL_ADC_Stop(&hadc);
+                    reveflag = 1;
+                }
+
         }
 
         HAL_Delay(1);   // 保持原有1ms循环延时

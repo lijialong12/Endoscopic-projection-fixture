@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(cmake --build build/Debug 2>&1)"
+      "PowerShell(cmake --build build/Debug 2>&1)",
+      "PowerShell(Get-ChildItem \"C:\\\\ST\" -ErrorAction SilentlyContinue 2>&1; Get-ChildItem \"C:\\\\Program Files\\\\STMicroelectronics\" -ErrorAction SilentlyContinue 2>&1; Get-ChildItem \"$env:USERPROFILE\\\\STMicroelectronics\" -ErrorAction SilentlyContinue 2>&1)"
     ]
   }
 }
