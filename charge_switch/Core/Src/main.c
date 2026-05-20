@@ -67,6 +67,43 @@ void iwdg_feed(void)
 {
     HAL_IWDG_Refresh(&hiwdg);
 }
+
+/* 充电状态消抖参数 */
+#define DEBOUNCE_THRESHOLD  50      // 消抖次数，循环周期 1ms → 50ms 确认
+
+static uint32_t debounce_cnt = 0;   // 消抖计数器
+static uint8_t  pending_state = 0;  // 临时状态（0:放电, 1:充电中, 2:充满）
+static uint8_t  stable_state  = 0;  // 稳定状态（用于程序逻辑）
+
+/**
+  * @brief  充电状态消抖（每1ms调用一次）
+  * @retval 无
+  */
+void ChargeState_Debounce(void)
+{
+    uint8_t current_state;
+
+    if (!CHRG) {
+        current_state = 1;          // 充电中
+    } else if (!STDBY) {
+        current_state = 2;          // 充满
+    } else {
+        current_state = 0;          // 放电
+    }
+
+    if (current_state != pending_state) {
+        debounce_cnt = 0;
+        pending_state = current_state;
+    } else {
+        if (debounce_cnt < DEBOUNCE_THRESHOLD) {
+            debounce_cnt++;
+        }
+        if (debounce_cnt >= DEBOUNCE_THRESHOLD) {
+            stable_state = current_state;   // 确认状态
+        }
+    }
+}
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -91,7 +128,6 @@ void SystemClock_Config(void);
 #define SCAN_INTERVAL_MS    10              // 按键扫描间隔：10ms
 #define CHARGE              1               // 充电状态
 #define DISCHARGE           0               // 放电状态
-
 
 /* 全局变量 */
 volatile uint32_t sys_tick_ms = 0;          // 系统毫秒计数器
@@ -191,13 +227,7 @@ void ShortPressAction(void)
         default: pwm_set(0); break;
     }
 
-    // // 确保 PWM 为打开状态
-    // if (!pwm_is_on) {
-    //     HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);
-    //     pwm_is_on = 1;
-    // }
-
-    printf("长按：切换至占空比 %d%%\r\n", gearkey * 10);
+    printf("短按：切换至占空比 %d%%\r\n", gearkey * 10);
 
     gearkey++;
     if (gearkey > 3) gearkey = 1;   // 档位循环：1 -> 2 -> 3 -> 1
@@ -209,17 +239,16 @@ void ShortPressAction(void)
   */
 void LongPressAction(void)
 {
-
     if (pwm_is_on) {
         HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
         pwm_is_on = 0;
         POWEROFF;  // 取POWER  
-        printf("短按：PWM 停止\r\n");
+        printf("长按：PWM 停止\r\n");
     } else {
         HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);
         pwm_is_on = 1;
         POWERON;  // 取POWER  
-        printf("短按：PWM 启动\r\n");
+        printf("长按：PWM 启动\r\n");
     }
 }
 
@@ -261,106 +290,98 @@ int main(void)
 
     // 启动定时器6中断
     Tim6_Start();
-    /* USER CODE END 2 */
 
-
-    if(!CHRG)
+    /* 充电状态初始消抖（简单快速确认） */
     {
-        HAL_Delay(20);  // 简单消抖
-        if(!KEY_PRESSED()) {
-        chargeflag = CHARGE;
+        uint8_t init_state1, init_state2;
+        init_state1 = (!CHRG) ? 1 : ((!STDBY) ? 2 : 0);
+        HAL_Delay(20);
+        init_state2 = (!CHRG) ? 1 : ((!STDBY) ? 2 : 0);
+        if (init_state1 == init_state2) {
+            stable_state = pending_state = init_state1;
+            debounce_cnt = DEBOUNCE_THRESHOLD;
+        } else {
+            stable_state = pending_state = 0;  // 默认放电
+            debounce_cnt = 0;
         }
     }
-    else
-    {
-        chargeflag = DISCHARGE; 
+
+    // 根据初始状态设置 chargeflag（若后续未使用可忽略）
+    if (stable_state == 1) {
+        chargeflag = CHARGE;
+    } else {
+        chargeflag = DISCHARGE;
+
         HAL_ADC_Start(&hadc);
-        if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK) {
+        if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK)
+        {
             adc_val = HAL_ADC_GetValue(&hadc);
-            //printf("adc_val = %lu\r\n", adc_val);       // 注意：%ld → %lu，因 adc_val 是 uint32_t
             vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
-            //printf("vol_v = %.2f V\r\n", vol_v);
-            if(vol_v > 4.0f) {
-                LED_0_ON;
-                LED_1_ON;
-                LED_2_ON;
-                LED_3_ON;
-            } 
-            else if(vol_v > 3.0f && vol_v <= 4.0f) {
-                LED_0_OFF;
-                LED_1_ON;
-                LED_2_ON;
-                LED_3_ON;
+
+            if (vol_v > 4.0f) {
+                LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
             }
-            else if(vol_v > 2.0f && vol_v <= 3.0f) {
-                LED_0_OFF;
-                LED_1_OFF;
-                LED_2_ON;
-                LED_3_ON;
+            else if (vol_v > 3.0f && vol_v <= 4.0f) {
+                LED_0_ON; LED_1_ON; LED_2_ON; LED_3_OFF;
+            }
+            else if (vol_v > 2.0f && vol_v <= 3.0f) {
+                LED_0_ON; LED_1_ON; LED_2_OFF; LED_3_OFF;
             }
             else {
-                LED_0_OFF;
-                LED_1_OFF;
-                LED_2_OFF;
-                LED_3_ON;
+                LED_0_ON; LED_1_OFF; LED_2_OFF; LED_3_OFF;
             }
-            
         }
         HAL_ADC_Stop(&hadc);
     }
 
+    /* USER CODE END 2 */
+
+    // 流水灯与放电刷新相关变量（静态，保持整个生命周期）
+    static uint32_t last_time = 0;
+    static uint8_t  led_count = 0;    // 0:全灭, 1~3:已亮个数, 4:全亮待熄灭
+    static uint8_t  reveflag = 1;     // 放电状态ADC刷新标志，0:需要刷新, 1:已刷新
 
     while (1)
     {
+        /* 每1ms调用充电状态消抖 */
+        ChargeState_Debounce();
+
         /* ---- ADC 采集与打印（每5分钟一次） ---- */
         static uint32_t last_adc_time = 0;
-        if (sys_tick_ms - last_adc_time >= 300000) {   // 300000ms = 5分钟
+        if (sys_tick_ms - last_adc_time >= 300000)   // 300000ms = 5分钟
+        {
             last_adc_time = sys_tick_ms;
 
-            HAL_ADC_Start(&hadc);
-            if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK) {
-                adc_val = HAL_ADC_GetValue(&hadc);
-                //printf("adc_val = %lu\r\n", adc_val);       // 注意：%ld → %lu，因 adc_val 是 uint32_t
-                vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
-                //printf("vol_v = %.2f V\r\n", vol_v);
-
-                if(chargeflag == DISCHARGE) 
+            // 仅当消抖确认为放电状态，且上次退出充电/充满后已刷新过（reveflag==1）时更新LED
+            if (stable_state == 0 && reveflag == 1)
+            {
+                HAL_ADC_Start(&hadc);
+                if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK)
                 {
-                    if(vol_v > 4.0f) {
-                        LED_0_ON;
-                        LED_1_ON;
-                        LED_2_ON;
-                        LED_3_ON;
-                    } 
-                    else if(vol_v > 3.0f && vol_v <= 4.0f) {
-                        LED_0_OFF;
-                        LED_1_ON;
-                        LED_2_ON;
-                        LED_3_ON;
+                    adc_val = HAL_ADC_GetValue(&hadc);
+                    vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
+
+                    if (vol_v > 4.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
                     }
-                    else if(vol_v > 2.0f && vol_v <= 3.0f) {
-                        LED_0_OFF;
-                        LED_1_OFF;
-                        LED_2_ON;
-                        LED_3_ON;
+                    else if (vol_v > 3.0f && vol_v <= 4.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_ON; LED_3_OFF;
+                    }
+                    else if (vol_v > 2.0f && vol_v <= 3.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_OFF; LED_3_OFF;
                     }
                     else {
-                        LED_0_OFF;
-                        LED_1_OFF;
-                        LED_2_OFF;
-                        LED_3_ON;
+                        LED_0_ON; LED_1_OFF; LED_2_OFF; LED_3_OFF;
                     }
                 }
-                
+                HAL_ADC_Stop(&hadc);
             }
-            HAL_ADC_Stop(&hadc);
         }
 
         /* ---- 按键扫描（每10ms一次） ---- */
         if (tick_10ms) {
             tick_10ms = 0;
             KeyScan();
-            // 其它后台任务（如喂狗等）
             iwdg_feed();
         }
 
@@ -374,98 +395,78 @@ int main(void)
             LongPressAction();
         }
 
-        // 静态变量放在函数开头，确保在 if/else 外部可访问
-        static uint32_t last_time = 0;
-        static uint8_t  led_count = 0;    // 0:全灭, 1~3:已亮个数, 4:全亮待熄灭
-        static uint8_t  reveflag = 0;     // 充电状态切换标志，0:未切换, 1:已切换
-
-        if (!CHRG)  //低电平充电中状态：每500ms点亮一个LED，直到全亮保持
+        /* ---- 充电/放电 LED 显示状态机（基于消抖后的 stable_state） ---- */
+        if (stable_state == 1)   // 充电中
         {
-            reveflag = 0;     // 充电状态切换后，重置标志以允许下次切换时重新计数
             if (HAL_GetTick() - last_time >= 500)
             {
                 last_time = HAL_GetTick();
 
+                // 标记当前处于充电/充满状态，以便退出时刷新放电LED
+                reveflag = 0;
+
                 if (led_count == 4)
                 {
-                    // 充电完成状态：点亮所有LED
-                    LED_0_ON;
-                    LED_1_OFF;
-                    LED_2_OFF;
-                    LED_3_OFF;
-                    led_count = 0;   // 下一个500ms将开始点亮第一个
+                    led_count = 0;
                 }
                 else
                 {
-                    // 点亮第 led_count 个LED（0→LED0, 1→LED1, 2→LED2, 3→LED3）
+                    // 依次点亮 LED0 ~ LED3（累积点亮，不熄灭已点亮的）
                     switch (led_count)
                     {
-                        case 0: LED_0_ON; break;
-                        case 1: LED_1_ON; break;
-                        case 2: LED_2_ON; break;
-                        case 3: LED_3_ON; break;
+                        case 0: LED_0_ON;  LED_1_OFF; LED_2_OFF; LED_3_OFF; break;
+                        case 1: LED_0_ON;  LED_1_ON;  LED_2_OFF; LED_3_OFF; break;
+                        case 2: LED_0_ON;  LED_1_ON;  LED_2_ON;  LED_3_OFF; break;
+                        case 3: LED_0_ON;  LED_1_ON;  LED_2_ON;  LED_3_ON;  break;
                         default: break;
                     }
-                    led_count++;     // 计数+1，若变成4则进入全亮保持状态
+                    led_count++;
                 }
             }
         }
-        else if(!STDBY) //低电平充满电状态
+        else if (stable_state == 2)   // 充满
         {
-            reveflag = 0;     // 充电状态切换后，重置标志以允许下次切换时重新计数
-            // 充电完成状态：点亮所有LED
+            // 充满状态 LED 全亮
             LED_0_ON;
             LED_1_ON;
             LED_2_ON;
             LED_3_ON;
+
+            // 重置流水灯变量，以便下次充电重新开始
+            reveflag = 0;
             led_count = 0;
             last_time = HAL_GetTick();
         }
-        else {
-                if(reveflag == 0) {
-                    HAL_ADC_Start(&hadc);
-                    if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK) {
-                        adc_val = HAL_ADC_GetValue(&hadc);
-                        //printf("adc_val = %lu\r\n", adc_val);       // 注意：%ld → %lu，因 adc_val 是 uint32_t
-                        vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
-                        //printf("vol_v = %.2f V\r\n", vol_v);
+        else   // 放电状态 (stable_state == 0)
+        {
+            // 刚从充电/充满退出时，立即用 ADC 刷新一次 LED 显示
+            if (reveflag == 0)
+            {
+                HAL_ADC_Start(&hadc);
+                if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK)
+                {
+                    adc_val = HAL_ADC_GetValue(&hadc);
+                    vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
 
-                        if(chargeflag == DISCHARGE) 
-                        {
-                            if(vol_v > 4.0f) {
-                                LED_0_ON;
-                                LED_1_ON;
-                                LED_2_ON;
-                                LED_3_ON;
-                            } 
-                            else if(vol_v > 3.0f && vol_v <= 4.0f) {
-                                LED_0_OFF;
-                                LED_1_ON;
-                                LED_2_ON;
-                                LED_3_ON;
-                            }
-                            else if(vol_v > 2.0f && vol_v <= 3.0f) {
-                                LED_0_OFF;
-                                LED_1_OFF;
-                                LED_2_ON;
-                                LED_3_ON;
-                            }
-                            else {
-                                LED_0_OFF;
-                                LED_1_OFF;
-                                LED_2_OFF;
-                                LED_3_ON;
-                            }
-                        }
-                        
+                    if (vol_v > 4.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
                     }
-                    HAL_ADC_Stop(&hadc);
-                    reveflag = 1;
+                    else if (vol_v > 3.0f && vol_v <= 4.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_ON; LED_3_OFF;
+                    }
+                    else if (vol_v > 2.0f && vol_v <= 3.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_OFF; LED_3_OFF;
+                    }
+                    else {
+                        LED_0_ON; LED_1_OFF; LED_2_OFF; LED_3_OFF;
+                    }
                 }
-
+                HAL_ADC_Stop(&hadc);
+                reveflag = 1;   // 标记已刷新，后续由5分钟定时更新
+            }
         }
 
-        HAL_Delay(1);   // 保持原有1ms循环延时
+        HAL_Delay(1);   // 保持1ms循环周期（与消抖函数调用频率一致）
     }
 }
 
