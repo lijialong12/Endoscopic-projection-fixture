@@ -155,7 +155,7 @@ typedef struct {
 KeyInfo_t key;
 
 /* 档位与 PWM 控制变量 */
-static uint8_t gearkey = 1;     // 当前档位 (1/2/3)，对应 10%/20%/30%
+static uint8_t gearkey = 2;     // 当前档位 (1/2/3)，对应 10%/20%/30%
 static uint8_t pwm_is_on = 0;   // PWM 当前输出状态 (0:停止, 1:输出)
 
 /* 函数声明 */
@@ -227,7 +227,7 @@ void ShortPressAction(void)
         default: pwm_set(0); break;
     }
 
-    printf("短按：切换至占空比 %d%%\r\n", gearkey * 10);
+    //printf("短按：切换至占空比 %d%%\r\n", gearkey * 10);
 
     gearkey++;
     if (gearkey > 3) gearkey = 1;   // 档位循环：1 -> 2 -> 3 -> 1
@@ -242,13 +242,18 @@ void LongPressAction(void)
     if (pwm_is_on) {
         HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
         pwm_is_on = 0;
-        POWEROFF;  // 取POWER  
-        printf("长按：PWM 停止\r\n");
+        POWEROFF;  
+        // 充满状态 LED 全灭
+        LED_0_OFF;
+        LED_1_OFF;
+        LED_2_OFF;
+        LED_3_OFF;
+        //printf("长按：PWM 停止\r\n");
     } else {
         HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);
         pwm_is_on = 1;
         POWERON;  // 取POWER  
-        printf("长按：PWM 启动\r\n");
+        //printf("长按：PWM 启动\r\n");
     }
 }
 
