@@ -19,27 +19,29 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
-
+#include "stm32l0xx_hal.h"
 
 
 /* USER CODE BEGIN 0 */
 TIM_HandleTypeDef htim22;
 TIM_HandleTypeDef htim6;
 
-/* 全局变量 -------------------------------------------------------*/
-extern volatile uint32_t sys_tick_ms;          // 系统时间（毫秒）
-extern volatile uint8_t  tick_10ms;            // 10ms 标志，供主循环使用
+/* 全锟街憋拷锟斤拷 -------------------------------------------------------*/
+extern volatile uint32_t sys_tick_ms;          // 系统时锟戒（锟斤拷锟诫）
+extern volatile uint8_t  tick_10ms;            // 10ms 锟斤拷志锟斤拷锟斤拷锟斤拷循锟斤拷使锟斤拷
+volatile  uint8_t  pwm_num;              // pwm鍚姩鍋滄棰戠巼鎺у埗鍙橀噺
+extern volatile uint8_t  pwm_start_stop;     // pwm鍚姩鍜屽仠姝㈡爣蹇楋紝0:鍋滄, 1:鍚姩
 /**
- * @brief       PWM初始化, 实际上就是初始化定时器
+ * @brief       PWM始, 实暇浅始时
  * @note
- *              定时器的时钟来源APB1 / APB2, 当APB1 / APB2 分频时, 定时器频率会自动翻倍
- *              因此, 一般情况下, 不需要再给定时器降频, 直接32Mhz 等于系统时钟频率
- *              定时器溢出时间计算方法: Tout = ((arr + 1) * (psc + 1)) / Ft us.
- *              Ft = 定时器工作频率, 单位: Mhz
+ *              时时源APB1 / APB2, APB1 / APB2 频时, 时频驶远
+ *              , 一,要俑时频, 直32Mhz系统时频, 使APB1 / APB2 32Mhz
+ *              锟斤拷时锟斤拷锟斤拷锟绞憋拷锟斤拷锟姐方锟斤拷: Tout = ((arr + 1) * (psc + 1)) / Ft us.
+ *              Ft = 锟斤拷时锟斤拷锟斤拷锟斤拷频锟斤拷, 锟斤拷位: Mhz
  *
- * @param       arr: 自动重装值
- * @param       psc: 时钟预分频数
- * @retval      无
+ * @param       arr: 锟皆讹拷锟斤拷装值
+ * @param       psc: 时锟斤拷预锟斤拷频锟斤拷
+ * @retval      锟斤拷
  */
 /* USER CODE END 0 */
 /* TIM22 init function */
@@ -52,7 +54,7 @@ void MX_TIM22_Init(uint16_t arr, uint16_t psc)
     htim22.Init.Period = arr;
     htim22.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim22.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-    if (HAL_TIM_PWM_Init(&htim22) != HAL_OK)      // 初始化为 PWM Init
+    if (HAL_TIM_PWM_Init(&htim22) != HAL_OK)      // 锟斤拷始锟斤拷为 PWM Init
     {
         Error_Handler();
     }
@@ -63,16 +65,16 @@ void MX_TIM22_Init(uint16_t arr, uint16_t psc)
     HAL_TIMEx_MasterConfigSynchronization(&htim22, &sMasterConfig);
 
     TIM_OC_InitTypeDef sConfigOC = {0};
-    sConfigOC.OCMode = TIM_OCMODE_PWM1;           // 初始化为 PWM1 模式
-    sConfigOC.Pulse = 0;                          // 初始占空比 0
+    sConfigOC.OCMode = TIM_OCMODE_PWM1;           // 锟斤拷始锟斤拷为 PWM1 模式
+    sConfigOC.Pulse = 0;                          // 锟斤拷始占锟秸憋拷 0
     sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
     sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-    if (HAL_TIM_PWM_ConfigChannel(&htim22, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) // 初始化为 PWM ConfigChannel
+    if (HAL_TIM_PWM_ConfigChannel(&htim22, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) // 锟斤拷始锟斤拷为 PWM ConfigChannel
     {
         Error_Handler();
     }
 
-    //HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);    // 启动 PWM 输出
+    //HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);    // 锟斤拷锟斤拷 PWM 锟斤拷锟?
 }
 
 
@@ -160,13 +162,13 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
 
 /* USER CODE BEGIN 1 */
 /**
- * @brief       调整PWM 占空比参数
- * @param       temp : 0~100，ARR=99
- * @retval      无
+ * @brief       锟斤拷锟斤拷PWM 占锟秸比诧拷锟斤拷
+ * @param       temp : 0~100锟斤拷ARR=99
+ * @retval      锟斤拷
  */
 void pwm_set(uint16_t temp)
 {
-    __HAL_TIM_SET_COMPARE(&htim22, TIM_CHANNEL_1, temp);  /* 设置新的占空比 */
+    __HAL_TIM_SET_COMPARE(&htim22, TIM_CHANNEL_1, temp);  /* 锟斤拷锟斤拷锟铰碉拷占锟秸憋拷 */
 }
 /* USER CODE END 1 */
 
@@ -203,12 +205,12 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 
 void Tim6_Start(void)
 {
-	HAL_TIM_Base_Start_IT(&htim6);                       /* 使能定时器x和定时器更新中断 */
+	HAL_TIM_Base_Start_IT(&htim6);                       /* 使锟杰讹拷时锟斤拷x锟酵讹拷时锟斤拷锟斤拷锟斤拷锟叫讹拷 */
 }
 
 void Tim6_Stop(void)
 {
-	HAL_TIM_Base_Stop_IT(&htim6);                       /* 失能定时器x和定时器更新中断 */
+	HAL_TIM_Base_Stop_IT(&htim6);                       /* 失锟杰讹拷时锟斤拷x锟酵讹拷时锟斤拷锟斤拷锟斤拷锟叫讹拷 */
 }
 
 
@@ -230,10 +232,32 @@ void TIM6_DAC_IRQHandler(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+  static uint8_t timsflag = 1;     // pwm鍚姩鍋滄棰戠巼鎺у埗鍙橀噺
 	
     if (htim->Instance == TIM6)
     {
-        sys_tick_ms += 10;      // 10ms 时基
-        tick_10ms = 1;          // 通知主循环扫描
+        sys_tick_ms += 10;      // 10ms 时锟斤拷
+        tick_10ms = 1;          // 通知锟斤拷循锟斤拷扫锟斤拷
+        
+          if (pwm_start_stop) {
+          pwm_num++;              // pwm棰戠巼鎺у埗鍙橀噺鑷  
+          if (timsflag && pwm_num >= 1)
+           {
+
+            pwm_num = 0;   // 閲嶇疆棰戠巼鎺у埗鍙橀噺
+            timsflag = 0;   // 璁剧疆鏍囧織锛岃〃绀鸿揪鍒伴鐜囨帶鍒舵潯浠?
+              HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);
+          }
+           if((!timsflag) && pwm_num >= 9)
+           {
+            pwm_num = 0;   // 閲嶇疆棰戠巼鎺у埗鍙橀噺
+            timsflag = 1;   // 璁剧疆鏍囧織锛岃〃绀鸿揪鍒伴鐜囨帶鍒舵潯浠?
+              HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
+            }
+      }
+      else if(pwm_start_stop == 0) {
+        pwm_num=0;   // 閲嶇疆棰戠巼鎺у埗鍙橀噺 
+          HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
+      }
     }
 }

@@ -132,6 +132,7 @@ void SystemClock_Config(void);
 /* 全局变量 */
 volatile uint32_t sys_tick_ms = 0;          // 系统毫秒计数器
 volatile uint8_t  tick_10ms = 0;            // 10ms 标志，供主循环使用
+volatile uint8_t  pwm_start_stop = 0;     // pwm启动和停止标志，0:停止, 1:启动
 float vol_v = 0;
 uint8_t chargeflag = 0;                     // 当前是否处于充电状态
 
@@ -221,16 +222,23 @@ void KeyScan(void)
 void ShortPressAction(void)
 {
     switch (gearkey) {
-        case 1: pwm_set(20); break;   // 20/200=10%
-        case 2: pwm_set(40); break;   // 40/200=20%
-        case 3: pwm_set(200); break;   // 60/200=30%
+        case 1: pwm_set(10); break;   // 20/200=10%
+        case 2: pwm_set(20); break;   // 40/200=20%
+        case 3: pwm_set(30); break;   // 60/200=30%
+        case 4: pwm_set(40); break;   // 20/200=10%
+        case 5: pwm_set(50); break;   // 40/200=20%
+        case 6: pwm_set(60); break;   // 60/200=30%
+        case 7: pwm_set(70); break;   // 40/200=20%
+        case 8: pwm_set(80); break;   // 60/200=30%
+        case 9: pwm_set(90); break;   // 40/200=20%
+        case 10: pwm_set(95); break;   // 60/200=30%
         default: pwm_set(0); break;
     }
 
     //printf("短按：切换至占空比 %d%%\r\n", gearkey * 10);
 
     gearkey++;
-    if (gearkey > 3) gearkey = 1;   // 档位循环：1 -> 2 -> 3 -> 1
+    if (gearkey > 10) gearkey = 1;   // 档位循环：1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 1
 }
 
 /**
@@ -280,7 +288,11 @@ int main(void)
     MX_DMA_Init();
     MX_USART1_UART_Init(115200);
     MX_ADC_Init();
-    MX_TIM22_Init(200, 16 - 1);             // PWM频率约10KHz
+    // MX_TIM22_Init(100-1, 64 - 1);   // PWM频率约1KHz
+    // MX_TIM22_Init(100-1, 32000 - 1);   // PWM频率约10Hz
+    // MX_TIM22_Init(100-1, 4 - 1);   // PWM频率约80KHz
+    MX_TIM22_Init(80-1, 4 - 1);    // 100kHz
+    // MX_TIM22_Init(134-1, 4 - 1);   // 60kHz
     MX_TIM6_Init(100 - 1, 3200 - 1);        // 32MHz/(3200*100)=100Hz，即10ms中断
     MX_IWDG_Init();
 
@@ -289,7 +301,7 @@ int main(void)
     memset(&key, 0, sizeof(key));
 
     // 初始 PWM 状态：占空比20%，输出关闭
-    pwm_set(20);
+    pwm_set(20);  // 默认占空比20%
     HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
     pwm_is_on = 0;
 
@@ -346,6 +358,7 @@ int main(void)
     static uint8_t  led_count = 0;    // 0:全灭, 1~3:已亮个数, 4:全亮待熄灭
     static uint8_t  reveflag = 1;     // 放电状态ADC刷新标志，0:需要刷新, 1:已刷新
 
+
     while (1)
     {
         /* 每1ms调用充电状态消抖 */
@@ -394,11 +407,14 @@ int main(void)
         if (key.short_flag) {
             key.short_flag = 0;
             ShortPressAction();
+            
         }
         if (key.long_flag) {
             key.long_flag = 0;
             LongPressAction();
+            pwm_start_stop = ~pwm_start_stop;   // 标记已通过短按切换占空比，等待长按事件处理
         }
+
 
         /* ---- 充电/放电 LED 显示状态机（基于消抖后的 stable_state） ---- */
         if (stable_state == 1)   // 充电中
