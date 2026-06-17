@@ -1,0 +1,200 @@
+[
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\main.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\main.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\main.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\main.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\gpio.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\gpio.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\gpio.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\gpio.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\adc.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\adc.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\adc.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\adc.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\dma.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\dma.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\dma.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\dma.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\tim.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\tim.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\tim.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\tim.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\usart.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\usart.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\usart.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\usart.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\stm32l0xx_it.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\stm32l0xx_it.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\stm32l0xx_it.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\stm32l0xx_it.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\stm32l0xx_hal_msp.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\stm32l0xx_hal_msp.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\stm32l0xx_hal_msp.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\stm32l0xx_hal_msp.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\sysmem.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\sysmem.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\sysmem.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\sysmem.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o CMakeFiles\\charge_switch.dir\\Core\\Src\\syscalls.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\syscalls.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\syscalls.c",
+  "output": "CMakeFiles\\charge_switch.dir\\Core\\Src\\syscalls.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -x assembler-with-cpp -MMD -MP -g -o CMakeFiles\\charge_switch.dir\\startup_stm32l051xx.s.obj -c D:\\Fork\\charge_switch\\charge_switch\\startup_stm32l051xx.s",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\startup_stm32l051xx.s",
+  "output": "CMakeFiles\\charge_switch.dir\\startup_stm32l051xx.s.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Core\\Src\\system_stm32l0xx.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\system_stm32l0xx.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Core\\Src\\system_stm32l0xx.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Core\\Src\\system_stm32l0xx.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_adc_ex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_iwdg.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_iwdg.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_iwdg.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_iwdg.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_i2c_ex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_rcc_ex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ramfunc.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ramfunc.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ramfunc.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ramfunc.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_flash_ex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_gpio.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_gpio.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_gpio.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_gpio.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_dma.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_dma.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_dma.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_dma.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_pwr_ex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_cortex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_cortex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_cortex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_cortex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_exti.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_exti.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_exti.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_exti.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_tim_ex.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart.c.obj"
+},
+{
+  "directory": "D:/Fork/charge_switch/charge_switch/build/Debug",
+  "command": "C:\\Users\\one\\AppData\\Local\\stm32cube\\bundles\\gnu-tools-for-stm32\\13.3.1+st.9\\bin\\arm-none-eabi-gcc.exe -DDEBUG -DSTM32L051xx -DUSE_HAL_DRIVER -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Core/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32L0xx/Include -ID:/Fork/charge_switch/charge_switch/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m0plus  -Wall -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11 -o cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart_ex.c.obj -c D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart_ex.c",
+  "file": "D:\\Fork\\charge_switch\\charge_switch\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart_ex.c",
+  "output": "cmake\\stm32cubemx\\CMakeFiles\\STM32_Drivers.dir\\__\\__\\Drivers\\STM32L0xx_HAL_Driver\\Src\\stm32l0xx_hal_uart_ex.c.obj"
+}
+]

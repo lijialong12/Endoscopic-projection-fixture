@@ -1,0 +1,6 @@
+D:/Fork/charge_switch/charge_switch/build/Debug/CMakeFiles/charge_switch.dir
+D:/Fork/charge_switch/charge_switch/build/Debug/CMakeFiles/edit_cache.dir
+D:/Fork/charge_switch/charge_switch/build/Debug/CMakeFiles/rebuild_cache.dir
+D:/Fork/charge_switch/charge_switch/build/Debug/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+D:/Fork/charge_switch/charge_switch/build/Debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+D:/Fork/charge_switch/charge_switch/build/Debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
