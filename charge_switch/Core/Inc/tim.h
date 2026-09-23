@@ -33,12 +33,15 @@ extern "C" {
 /* USER CODE END Includes */
 
 extern TIM_HandleTypeDef htim22;
+extern TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
 void MX_TIM22_Init(uint16_t arr, uint16_t psc);
+
+void MX_TIM2_Init(uint16_t arr, uint16_t psc);
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
@@ -50,6 +53,8 @@ void Tim6_Start(void);
 void Tim6_Stop(void);
 
 void pwm_set(uint16_t temp);
+
+void pwm_set2(uint16_t temp);
 
 /* USER CODE END Prototypes */
 

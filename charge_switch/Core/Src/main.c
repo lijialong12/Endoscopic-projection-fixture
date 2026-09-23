@@ -44,7 +44,7 @@
 IWDG_HandleTypeDef hiwdg;
 
 /**
-  * @brief  独立看门狗初始化
+  * @brief  独立看门狗时钟初始化
   * @retval 无
   */
 void MX_IWDG_Init(void)
@@ -60,7 +60,7 @@ void MX_IWDG_Init(void)
 }
 
 /**
-  * @brief  喂狗函数
+  * @brief  喂狗操作
   * @retval 无
   */
 void iwdg_feed(void)
@@ -68,15 +68,15 @@ void iwdg_feed(void)
     HAL_IWDG_Refresh(&hiwdg);
 }
 
-/* 充电状态消抖参数 */
-#define DEBOUNCE_THRESHOLD  50      // 消抖次数，循环周期 1ms → 50ms 确认
+/* 充电状态检测相关宏定义 */
+#define DEBOUNCE_THRESHOLD  50      // 消抖阈值：主循环每 1ms 一次，累计 50ms 确认
 
-static uint32_t debounce_cnt = 0;   // 消抖计数器
-static uint8_t  pending_state = 0;  // 临时状态（0:放电, 1:充电中, 2:充满）
-static uint8_t  stable_state  = 0;  // 稳定状态（用于程序逻辑）
+static uint32_t debounce_cnt = 0;   // 消抖计数
+static uint8_t  pending_state = 0;  // 临时状态：0:放电, 1:充电中, 2:充电完成
+static uint8_t  stable_state  = 0;  // 稳定状态，供充电逻辑使用
 
 /**
-  * @brief  充电状态消抖（每1ms调用一次）
+  * @brief  充电状态检测，每1ms调用一次
   * @retval 无
   */
 void ChargeState_Debounce(void)
@@ -86,7 +86,7 @@ void ChargeState_Debounce(void)
     if (!CHRG) {
         current_state = 1;          // 充电中
     } else if (!STDBY) {
-        current_state = 2;          // 充满
+        current_state = 2;          // 充电完成
     } else {
         current_state = 0;          // 放电
     }
@@ -122,7 +122,7 @@ extern float ADC_ConvertedValue;
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
-/* 按键与时间相关宏定义 */
+/* 按键定时扫描相关宏定义 */
 #define KEY_PRESSED()       (HAL_GPIO_ReadPin(key_GPIO_Port, key_Pin) == GPIO_PIN_RESET)  // 按键按下为低电平
 #define LONG_PRESS_MS       2000            // 长按阈值：2秒
 #define SCAN_INTERVAL_MS    10              // 按键扫描间隔：10ms
@@ -130,7 +130,7 @@ void SystemClock_Config(void);
 #define DISCHARGE           0               // 放电状态
 
 /* 全局变量 */
-volatile uint32_t sys_tick_ms = 0;          // 系统毫秒计数器
+volatile uint32_t sys_tick_ms = 0;          // 系统运行计时（毫秒）
 volatile uint8_t  tick_10ms = 0;            // 10ms 标志，供主循环使用
 float vol_v = 0;
 uint8_t chargeflag = 0;                     // 当前是否处于充电状态
@@ -146,17 +146,17 @@ typedef enum {
 /* 按键信息结构体 */
 typedef struct {
     KeyState_t state;           // 当前状态
-    uint32_t   press_start_ms;  // 按键按下的起始时间（毫秒）
+    uint32_t   press_start_ms;  // 按键按下时的起始时间（毫秒）
     uint8_t    short_flag;      // 短按事件标志
     uint8_t    long_flag;       // 长按事件标志
-    uint8_t    long_triggered;  // 长按是否已触发（防止重复触发）
+    uint8_t    long_triggered;  // 长按是否已触发，防止重复触发
 } KeyInfo_t;
 
 KeyInfo_t key;
 
 /* 档位与 PWM 控制变量 */
-static uint8_t gearkey = 2;     // 当前档位 (1/2/3)，对应 10%/20%/30%
-static uint8_t pwm_is_on = 0;   // PWM 当前输出状态 (0:停止, 1:输出)
+static uint8_t gearkey = 3;     // 当前档位 (1/2/3)，对应 10%/50%/100%
+static uint8_t pwm_is_on = 0;   // PWM 当前开关状态 (0:停止, 1:开启)
 
 /* 函数声明 */
 void KeyScan(void);             // 按键扫描状态机
@@ -164,7 +164,7 @@ void ShortPressAction(void);    // 短按动作
 void LongPressAction(void);     // 长按动作
 
 /**
-  * @brief  按键扫描状态机（每10ms调用一次）
+  * @brief  按键扫描状态机，每10ms调用一次
   * @retval 无
   */
 void KeyScan(void)
@@ -182,20 +182,20 @@ void KeyScan(void)
         case KS_DEBOUNCE_DOWN:
             if (is_pressed) {
                 key.state = KS_PRESSED;
-                key.long_triggered = 0;     // 新一次按键开始，重置长按触发标志
+                key.long_triggered = 0;     // 第一次按下开始计时，清除长按触发标志
             } else {
-                key.state = KS_IDLE;        // 抖动，视为无效
+                key.state = KS_IDLE;        // 抖动无效，返回空闲
             }
             break;
 
         case KS_PRESSED:
             if (!is_pressed) {
-                key.state = KS_DEBOUNCE_UP; // 按键释放，进入释放消抖
+                key.state = KS_DEBOUNCE_UP; // 抬起抖动，进入释放确认
             } else {
-                // 仍在按下，检查是否达到长按时间
+                // 正在按下，判断是否达到长按时间
                 if (!key.long_triggered && (sys_tick_ms - key.press_start_ms >= LONG_PRESS_MS)) {
                     key.long_flag = 1;      // 置位长按事件标志
-                    key.long_triggered = 1; // 避免重复触发
+                    key.long_triggered = 1; // 防止重复触发
                 }
             }
             break;
@@ -203,38 +203,38 @@ void KeyScan(void)
         case KS_DEBOUNCE_UP:
             if (!is_pressed) {
                 // 确认已释放
-                if (!key.long_triggered) {  // 没有触发过长按，则是短按
+                if (!key.long_triggered) {  // 未触发长按，判定为短按
                     key.short_flag = 1;
                 }
                 key.state = KS_IDLE;
             } else {
-                key.state = KS_PRESSED;     // 释放时的抖动，回到按下状态
+                key.state = KS_PRESSED;     // 释放抖动，弹回按下状态
             }
             break;
     }
 }
 
 /**
-  * @brief  短按动作：切换 PWM 输出开关
+  * @brief  短按动作：切换 PWM 占空比档位
   * @retval 无
   */
 void ShortPressAction(void)
 {
     switch (gearkey) {
         case 1: pwm_set(20); break;   // 20/200=10%
-        case 2: pwm_set(40); break;   // 40/200=20%
-        case 3: pwm_set(200); break;   // 60/200=30%
+        case 2: pwm_set(100); break;   // 100/200=50%
+        case 3: pwm_set(200); break;   // 200/200=100%
         default: pwm_set(0); break;
     }
 
-    //printf("短按：切换至占空比 %d%%\r\n", gearkey * 10);
+    //printf("短按切换档位，占空比 %d%%\r\n", gearkey * 10);
 
     gearkey++;
     if (gearkey > 3) gearkey = 1;   // 档位循环：1 -> 2 -> 3 -> 1
 }
 
 /**
-  * @brief  长按动作：循环切换占空比并强制打开 PWM
+  * @brief  长按动作：打开/关闭 PWM
   * @retval 无
   */
 void LongPressAction(void)
@@ -243,17 +243,19 @@ void LongPressAction(void)
         HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
         pwm_is_on = 0;
         POWEROFF;  
-        // 充满状态 LED 全灭
+        // 关闭状态 LED 全灭
         LED_0_OFF;
         LED_1_OFF;
         LED_2_OFF;
         LED_3_OFF;
-        //printf("长按：PWM 停止\r\n");
+        //printf("长按关闭 PWM 停止\r\n");
     } else {
         HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);
         pwm_is_on = 1;
-        POWERON;  // 取POWER  
-        //printf("长按：PWM 启动\r\n");
+        POWERON;  // 打开POWER电源
+        pwm_set(200);  // 设置占空比为100%
+        gearkey = 1;  // 复位档位为1（100%占空比）
+        //printf("长按打开 PWM 开启\r\n");
     }
 }
 
@@ -280,23 +282,54 @@ int main(void)
     MX_DMA_Init();
     MX_USART1_UART_Init(115200);
     MX_ADC_Init();
-    MX_TIM22_Init(200, 16 - 1);             // PWM频率约10KHz
-    MX_TIM6_Init(100 - 1, 3200 - 1);        // 32MHz/(3200*100)=100Hz，即10ms中断
-    MX_IWDG_Init();
+    MX_TIM22_Init(200, 16 - 1);  // PWM1（PA6/TIM22_CH1），频率约10KHz
+    MX_TIM2_Init(200, 16 - 1);   // PWM2（PA5/TIM2_CH1），频率约10KHz
+    MX_TIM6_Init(100 - 1, 3200 - 1);        // 32MHz/(3200*100)=100Hz，10ms中断
 
     /* USER CODE BEGIN 2 */
     // 初始化按键结构体
     memset(&key, 0, sizeof(key));
 
-    // 初始 PWM 状态：占空比20%，输出关闭
+    // 初始化 PWM 状态：占空比20%，默认关闭
     pwm_set(20);
     HAL_TIM_PWM_Stop(&htim22, TIM_CHANNEL_1);
     pwm_is_on = 0;
 
-    // 启动定时器6中断
+    // PWM2 初始占空比50%并开启（调试用）
+    pwm_set2(50);
+    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+    // HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+
+
+
+
+    // 开启定时器6中断
     Tim6_Start();
 
-    /* 充电状态初始消抖（简单快速确认） */
+    // HAL_Delay(1000);  // 稳定时间，确保系统初始化完成
+    
+        HAL_ADC_Start(&hadc);
+        if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK)
+        {
+            adc_val = HAL_ADC_GetValue(&hadc);
+            vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
+            printf("电压: %.2f V\r\n", vol_v);
+            if (vol_v > 4.0f) {
+                LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
+            }
+            else if (vol_v > 3.0f && vol_v <= 4.0f) {
+                LED_0_ON; LED_1_ON; LED_2_ON; LED_3_OFF;
+            }
+            else if (vol_v > 2.0f && vol_v <= 3.0f) {
+                LED_0_ON; LED_1_ON; LED_2_OFF; LED_3_OFF;
+            }
+            else {
+                LED_0_ON; LED_1_OFF; LED_2_OFF; LED_3_OFF;
+            }
+        }
+        HAL_ADC_Stop(&hadc);
+
+    /* 充电状态初始化：两次读取简单确认 */
     {
         uint8_t init_state1, init_state2;
         init_state1 = (!CHRG) ? 1 : ((!STDBY) ? 2 : 0);
@@ -311,7 +344,7 @@ int main(void)
         }
     }
 
-    // 根据初始状态设置 chargeflag（若后续未使用可忽略）
+    // 根据初始状态设置 chargeflag（暂未使用，可忽略）
     if (stable_state == 1) {
         chargeflag = CHARGE;
     } else {
@@ -322,7 +355,7 @@ int main(void)
         {
             adc_val = HAL_ADC_GetValue(&hadc);
             vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
-
+            printf("电压: %.2f V\r\n", vol_v);
             if (vol_v > 4.0f) {
                 LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
             }
@@ -339,25 +372,28 @@ int main(void)
         HAL_ADC_Stop(&hadc);
     }
 
+
+    MX_IWDG_Init();
     /* USER CODE END 2 */
 
-    // 流水灯与放电刷新相关变量（静态，保持整个生命周期）
+    // 充放电 LED 显示相关变量
     static uint32_t last_time = 0;
-    static uint8_t  led_count = 0;    // 0:全灭, 1~3:已亮个数, 4:全亮待熄灭
-    static uint8_t  reveflag = 1;     // 放电状态ADC刷新标志，0:需要刷新, 1:已刷新
+    static uint8_t  led_count = 0;    // 0:全灭, 1~3:依次点亮, 4:全亮
+    static uint8_t  reveflag = 1;     // 放电状态ADC刷新标志：0:需刷新, 1:已刷新
+    static uint16_t  cic = 0;       // 计数变量，每4000ms打印一次电压
 
     while (1)
     {
-        /* 每1ms调用充电状态消抖 */
+        /* 每1ms更新一次充电状态检测 */
         ChargeState_Debounce();
 
-        /* ---- ADC 采集与打印（每5分钟一次） ---- */
+        /* ---- ADC 采集并打印（每5分钟一次） ---- */
         static uint32_t last_adc_time = 0;
         if (sys_tick_ms - last_adc_time >= 300000)   // 300000ms = 5分钟
         {
             last_adc_time = sys_tick_ms;
 
-            // 仅当消抖确认为放电状态，且上次退出充电/充满后已刷新过（reveflag==1）时更新LED
+            // 放电状态且Led未刷新（reveflag==1）时，每5分钟刷新一次
             if (stable_state == 0 && reveflag == 1)
             {
                 HAL_ADC_Start(&hadc);
@@ -365,7 +401,7 @@ int main(void)
                 {
                     adc_val = HAL_ADC_GetValue(&hadc);
                     vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
-
+                    printf("电压: %.2f V\r\n", vol_v);
                     if (vol_v > 4.0f) {
                         LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
                     }
@@ -390,7 +426,7 @@ int main(void)
             iwdg_feed();
         }
 
-        /* ---- 处理按键事件 ---- */
+        /* ---- 按键事件处理 ---- */
         if (key.short_flag) {
             key.short_flag = 0;
             ShortPressAction();
@@ -400,14 +436,14 @@ int main(void)
             LongPressAction();
         }
 
-        /* ---- 充电/放电 LED 显示状态机（基于消抖后的 stable_state） ---- */
+        /* ---- 充放电 LED 显示（根据 stable_state） ---- */
         if (stable_state == 1)   // 充电中
         {
             if (HAL_GetTick() - last_time >= 500)
             {
                 last_time = HAL_GetTick();
 
-                // 标记当前处于充电/充满状态，以便退出时刷新放电LED
+                // 标记正在充电，退出后刷新放电LED
                 reveflag = 0;
 
                 if (led_count == 4)
@@ -416,7 +452,7 @@ int main(void)
                 }
                 else
                 {
-                    // 依次点亮 LED0 ~ LED3（累积点亮，不熄灭已点亮的）
+                    // 依次点亮 LED0 ~ LED3，累积到全亮后熄灭再循环
                     switch (led_count)
                     {
                         case 0: LED_0_ON;  LED_1_OFF; LED_2_OFF; LED_3_OFF; break;
@@ -429,7 +465,7 @@ int main(void)
                 }
             }
         }
-        else if (stable_state == 2)   // 充满
+        else if (stable_state == 2)   // 充电完成
         {
             // 充满状态 LED 全亮
             LED_0_ON;
@@ -437,22 +473,26 @@ int main(void)
             LED_2_ON;
             LED_3_ON;
 
-            // 重置流水灯变量，以便下次充电重新开始
+            // 重置流水标志，以便下次充电重新开始
             reveflag = 0;
             led_count = 0;
             last_time = HAL_GetTick();
         }
         else   // 放电状态 (stable_state == 0)
         {
-            // 刚从充电/充满退出时，立即用 ADC 刷新一次 LED 显示
-            if (reveflag == 0)
+
+            if( cic <= 4000 )  // 每4000ms打印一次电压
             {
-                HAL_ADC_Start(&hadc);
+                    if(cic >= 3990)
+                    {
+                        cic = 4001;
+                    }
+                    HAL_ADC_Start(&hadc);
                 if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK)
                 {
                     adc_val = HAL_ADC_GetValue(&hadc);
                     vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
-
+                    printf("电压: %.2f V\r\n", vol_v);
                     if (vol_v > 4.0f) {
                         LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
                     }
@@ -467,11 +507,35 @@ int main(void)
                     }
                 }
                 HAL_ADC_Stop(&hadc);
-                reveflag = 1;   // 标记已刷新，后续由5分钟定时更新
+            }
+            // 刚从充电/充满退出时，用ADC刷新一次LED显示
+            if (reveflag == 0)
+            {
+                HAL_ADC_Start(&hadc);
+                if (HAL_ADC_PollForConversion(&hadc, 100) == HAL_OK)
+                {
+                    adc_val = HAL_ADC_GetValue(&hadc);
+                    vol_v = ((adc_val * 3.3f) / 4096.0f) * 2.0f;
+                    printf("电压: %.2f V\r\n", vol_v);
+                    if (vol_v > 4.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_ON; LED_3_ON;
+                    }
+                    else if (vol_v > 3.0f && vol_v <= 4.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_ON; LED_3_OFF;
+                    }
+                    else if (vol_v > 2.0f && vol_v <= 3.0f) {
+                        LED_0_ON; LED_1_ON; LED_2_OFF; LED_3_OFF;
+                    }
+                    else {
+                        LED_0_ON; LED_1_OFF; LED_2_OFF; LED_3_OFF;
+                    }
+                }
+                HAL_ADC_Stop(&hadc);
+                reveflag = 1;   // 已刷新，等待5分钟定时再更新
             }
         }
-
-        HAL_Delay(1);   // 保持1ms循环周期（与消抖函数调用频率一致）
+        cic++;
+        HAL_Delay(1);   // 主循环1ms周期，与定时器中断频率一致
     }
 }
 

@@ -25,21 +25,22 @@
 /* USER CODE BEGIN 0 */
 TIM_HandleTypeDef htim22;
 TIM_HandleTypeDef htim6;
+TIM_HandleTypeDef htim2;
 
-/* È«¾Ö±äÁ¿ -------------------------------------------------------*/
-extern volatile uint32_t sys_tick_ms;          // ÏµÍ³Ê±¼ä£¨ºÁÃë£©
-extern volatile uint8_t  tick_10ms;            // 10ms ±êÖ¾£¬¹©Ö÷Ñ­»·Ê¹ÓÃ
+/* È«ï¿½Ö±ï¿½ï¿½ï¿½ -------------------------------------------------------*/
+extern volatile uint32_t sys_tick_ms;          // ÏµÍ³Ê±ï¿½ä£¨ï¿½ï¿½ï¿½ë£©
+extern volatile uint8_t  tick_10ms;            // 10ms ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½Ê¹ï¿½ï¿½
 /**
- * @brief       PWM³õÊ¼»¯, Êµ¼ÊÉÏ¾ÍÊÇ³õÊ¼»¯¶¨Ê±Æ÷
+ * @brief       PWMï¿½ï¿½Ê¼ï¿½ï¿½, Êµï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Ç³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
  * @note
- *              ¶¨Ê±Æ÷µÄÊ±ÖÓÀ´Ô´APB1 / APB2, µ±APB1 / APB2 ·ÖÆµÊ±, ¶¨Ê±Æ÷ÆµÂÊ»á×Ô¶¯·­±¶
- *              Òò´Ë, Ò»°ãÇé¿öÏÂ, ²»ÐèÒªÔÙ¸ø¶¨Ê±Æ÷½µÆµ, Ö±½Ó32Mhz µÈÓÚÏµÍ³Ê±ÖÓÆµÂÊ
- *              ¶¨Ê±Æ÷Òç³öÊ±¼ä¼ÆËã·½·¨: Tout = ((arr + 1) * (psc + 1)) / Ft us.
- *              Ft = ¶¨Ê±Æ÷¹¤×÷ÆµÂÊ, µ¥Î»: Mhz
+ *              ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ô´APB1 / APB2, ï¿½ï¿½APB1 / APB2 ï¿½ï¿½ÆµÊ±, ï¿½ï¿½Ê±ï¿½ï¿½Æµï¿½Ê»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
+ *              ï¿½ï¿½ï¿½, Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Òªï¿½Ù¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Æµ, Ö±ï¿½ï¿½32Mhz ï¿½ï¿½ï¿½ï¿½ÏµÍ³Ê±ï¿½ï¿½Æµï¿½ï¿½
+ *              ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ã·½ï¿½ï¿½: Tout = ((arr + 1) * (psc + 1)) / Ft us.
+ *              Ft = ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½, ï¿½ï¿½Î»: Mhz
  *
- * @param       arr: ×Ô¶¯ÖØ×°Öµ
- * @param       psc: Ê±ÖÓÔ¤·ÖÆµÊý
- * @retval      ÎÞ
+ * @param       arr: ï¿½Ô¶ï¿½ï¿½ï¿½×°Öµ
+ * @param       psc: Ê±ï¿½ï¿½Ô¤ï¿½ï¿½Æµï¿½ï¿½
+ * @retval      ï¿½ï¿½
  */
 /* USER CODE END 0 */
 /* TIM22 init function */
@@ -52,7 +53,7 @@ void MX_TIM22_Init(uint16_t arr, uint16_t psc)
     htim22.Init.Period = arr;
     htim22.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim22.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-    if (HAL_TIM_PWM_Init(&htim22) != HAL_OK)      // ³õÊ¼»¯Îª PWM Init
+    if (HAL_TIM_PWM_Init(&htim22) != HAL_OK)      // ï¿½ï¿½Ê¼ï¿½ï¿½Îª PWM Init
     {
         Error_Handler();
     }
@@ -63,18 +64,50 @@ void MX_TIM22_Init(uint16_t arr, uint16_t psc)
     HAL_TIMEx_MasterConfigSynchronization(&htim22, &sMasterConfig);
 
     TIM_OC_InitTypeDef sConfigOC = {0};
-    sConfigOC.OCMode = TIM_OCMODE_PWM1;           // ³õÊ¼»¯Îª PWM1 Ä£Ê½
-    sConfigOC.Pulse = 0;                          // ³õÊ¼Õ¼¿Õ±È 0
+    sConfigOC.OCMode = TIM_OCMODE_PWM1;           // ï¿½ï¿½Ê¼ï¿½ï¿½Îª PWM1 Ä£Ê½
+    sConfigOC.Pulse = 0;                          // ï¿½ï¿½Ê¼Õ¼ï¿½Õ±ï¿½ 0
     sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
     sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-    if (HAL_TIM_PWM_ConfigChannel(&htim22, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) // ³õÊ¼»¯Îª PWM ConfigChannel
+    if (HAL_TIM_PWM_ConfigChannel(&htim22, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) // ï¿½ï¿½Ê¼ï¿½ï¿½Îª PWM ConfigChannel
     {
         Error_Handler();
     }
 
-    //HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);    // Æô¶¯ PWM Êä³ö
+    //HAL_TIM_PWM_Start(&htim22, TIM_CHANNEL_1);    // ï¿½ï¿½ï¿½ï¿½ PWM ï¿½ï¿½ï¿½
 }
 
+
+
+/* TIM2 init function */
+void MX_TIM2_Init(uint16_t arr, uint16_t psc)
+{
+    __HAL_RCC_TIM2_CLK_DISABLE();
+    htim2.Instance = TIM2;
+    htim2.Init.Prescaler = psc;
+    htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+    htim2.Init.Period = arr;
+    htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+    htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+    if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    TIM_MasterConfigTypeDef sMasterConfig = {0};
+    sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+    sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+    HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig);
+
+    TIM_OC_InitTypeDef sConfigOC = {0};
+    sConfigOC.OCMode = TIM_OCMODE_PWM1;
+    sConfigOC.Pulse = 0;
+    sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+    sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+    if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
 
 
 /* TIM6 init function */
@@ -127,6 +160,22 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* tim_pwmHandle)
 
   /* USER CODE END TIM22_MspInit 1 */
   }
+  else if(tim_pwmHandle->Instance==TIM2)
+  {
+    /* TIM2 clock enable */
+    __HAL_RCC_TIM2_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    /**TIM2 GPIO Configuration
+    PA5     ------> TIM2_CH1
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_5;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF5_TIM2;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  }
 }
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
 {
@@ -153,6 +202,19 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
 
   /* USER CODE END TIM22_MspPostInit 1 */
   }
+  else if(timHandle->Instance==TIM2)
+  {
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    /**TIM2 GPIO Configuration
+    PA5     ------> TIM2_CH1
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_5;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF5_TIM2;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  }
 }
 
 
@@ -160,13 +222,22 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
 
 /* USER CODE BEGIN 1 */
 /**
- * @brief       µ÷ÕûPWM Õ¼¿Õ±È²ÎÊý
- * @param       temp : 0~100£¬ARR=99
- * @retval      ÎÞ
+ * @brief       ï¿½ï¿½ï¿½ï¿½PWM Õ¼ï¿½Õ±È²ï¿½ï¿½ï¿½
+ * @param       temp : 0~100ï¿½ï¿½ARR=99
+ * @retval      ï¿½ï¿½
  */
 void pwm_set(uint16_t temp)
 {
-    __HAL_TIM_SET_COMPARE(&htim22, TIM_CHANNEL_1, temp);  /* ÉèÖÃÐÂµÄÕ¼¿Õ±È */
+    __HAL_TIM_SET_COMPARE(&htim22, TIM_CHANNEL_1, temp);  /* ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Õ¼ï¿½Õ±ï¿½ */
+}
+/**
+ * @brief       ÉèÖÃPWM2 Õ¼¿Õ±È²ÎÊý
+ * @param       temp : 0~ARR£¨PWM2 Í¨µÀ1£©
+ * @retval      ÎÞ
+ */
+void pwm_set2(uint16_t temp)
+{
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, temp);  /* ÉèÖÃÐÂµÄÕ¼¿Õ±È */
 }
 /* USER CODE END 1 */
 
@@ -203,12 +274,12 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 
 void Tim6_Start(void)
 {
-	HAL_TIM_Base_Start_IT(&htim6);                       /* Ê¹ÄÜ¶¨Ê±Æ÷xºÍ¶¨Ê±Æ÷¸üÐÂÖÐ¶Ï */
+	HAL_TIM_Base_Start_IT(&htim6);                       /* Ê¹ï¿½Ü¶ï¿½Ê±ï¿½ï¿½xï¿½Í¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ */
 }
 
 void Tim6_Stop(void)
 {
-	HAL_TIM_Base_Stop_IT(&htim6);                       /* Ê§ÄÜ¶¨Ê±Æ÷xºÍ¶¨Ê±Æ÷¸üÐÂÖÐ¶Ï */
+	HAL_TIM_Base_Stop_IT(&htim6);                       /* Ê§ï¿½Ü¶ï¿½Ê±ï¿½ï¿½xï¿½Í¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ */
 }
 
 
@@ -233,7 +304,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	
     if (htim->Instance == TIM6)
     {
-        sys_tick_ms += 10;      // 10ms Ê±»ù
-        tick_10ms = 1;          // Í¨ÖªÖ÷Ñ­»·É¨Ãè
+        sys_tick_ms += 10;      // 10ms Ê±ï¿½ï¿½
+        tick_10ms = 1;          // Í¨Öªï¿½ï¿½Ñ­ï¿½ï¿½É¨ï¿½ï¿½
     }
 }
